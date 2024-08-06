@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.crud_spring_pessoa.Model.Pessoa;
 import br.com.crud_spring_pessoa.repository.PessoaRepository;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("/api/pessoas")
+@AllArgsConstructor
 public class PessoaController {
 
     //@Autowired
@@ -28,38 +31,38 @@ public class PessoaController {
         return pessoaRepository.findAll();
     }
 
-    // @GetMapping("/{id}")
-    // public ResponseEntity<Pessoa> getPessoaById(@PathVariable Long id) {
-    //     return pessoaRepository.findById(id)
-    //             .map(ResponseEntity::ok)
-    //             .orElse(ResponseEntity.notFound().build());
-    // }
+    @GetMapping("/{id}")
+    public ResponseEntity<Pessoa> getPessoaById(@PathVariable Long id) {
+        return pessoaRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
-    // @PostMapping
-    // public Pessoa createPessoa(@RequestBody Pessoa pessoa) {
-    //     return pessoaRepository.save(pessoa);
-    // }
+    @PostMapping
+    public Pessoa createPessoa(@Valid @RequestBody Pessoa pessoa) {
+        return pessoaRepository.save(pessoa);
+    }
 
-    // @PutMapping("/{id}")
-    // public ResponseEntity<Pessoa> updatePessoa(@PathVariable Long id, @RequestBody Pessoa pessoaDetails) {
-    //     return pessoaRepository.findById(id)
-    //             .map(pessoa -> {
-    //                 pessoa.setNome(pessoaDetails.getNome());
-    //                 pessoa.setIdade(pessoaDetails.getIdade());
-    //                 pessoa.setEmail(pessoaDetails.getEmail());
-    //                 Pessoa updatedPessoa = pessoaRepository.save(pessoa);
-    //                 return ResponseEntity.ok(updatedPessoa);
-    //             })
-    //             .orElse(ResponseEntity.notFound().build());
-    // }
+    @PutMapping("/{id}")
+    public ResponseEntity<Pessoa> updatePessoa(@PathVariable Long id, @RequestBody Pessoa pessoaDetails) {
+        return pessoaRepository.findById(id)
+                .map(pessoa -> {
+                    pessoa.setNome(pessoaDetails.getNome());
+                    pessoa.setIdade(pessoaDetails.getIdade());
+                    pessoa.setEmail(pessoaDetails.getEmail());
+                    Pessoa updatedPessoa = pessoaRepository.save(pessoa);
+                    return ResponseEntity.ok(updatedPessoa);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 
-    // @DeleteMapping("/{id}")
-    // public ResponseEntity<Void> deletePessoa(@PathVariable Long id) {
-    //     return pessoaRepository.findById(id)
-    //             .map(pessoa -> {
-    //                 pessoaRepository.delete(pessoa);
-    //                 return ResponseEntity.noContent().build();
-    //             })
-    //             .orElse(ResponseEntity.notFound().build());
-    // }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deletePessoa(@PathVariable Long id) {
+        return pessoaRepository.findById(id)
+                .map(pessoa -> {
+                    pessoaRepository.delete(pessoa);
+                    return ResponseEntity.noContent().build();
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
 }
