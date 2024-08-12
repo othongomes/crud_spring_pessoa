@@ -1,6 +1,12 @@
 package br.com.crud_spring_pessoa.Model;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,6 +30,7 @@ public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("_id")
     private Long id;
 
     @Column(nullable = false)
@@ -33,7 +40,8 @@ public class Pessoa {
 
     @Column(nullable = false)
     @NotNull(message = "A idade é obrigatória")
-    private int idade;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate nascimento;
     
     @Column(nullable = false)
     @Email(message = "Email deve ser válido")
@@ -41,7 +49,7 @@ public class Pessoa {
     private String email;
 
     @Column(nullable = false, unique = true)
-    @CPF(message = "CPF inválido")
+    //@CPF(message = "CPF inválido")
     @NotBlank(message = "O CPF é obrigatório")
     private String cpf;
 

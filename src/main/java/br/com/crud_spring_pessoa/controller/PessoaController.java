@@ -2,7 +2,6 @@ package br.com.crud_spring_pessoa.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +47,7 @@ public class PessoaController {
         return pessoaRepository.findById(id)
                 .map(pessoa -> {
                     pessoa.setNome(pessoaDetails.getNome());
-                    pessoa.setIdade(pessoaDetails.getIdade());
+                    pessoa.setNascimento(pessoaDetails.getNascimento());
                     pessoa.setEmail(pessoaDetails.getEmail());
                     Pessoa updatedPessoa = pessoaRepository.save(pessoa);
                     return ResponseEntity.ok(updatedPessoa);
