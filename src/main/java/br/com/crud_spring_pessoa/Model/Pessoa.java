@@ -34,6 +34,10 @@ public class Pessoa {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank(message = "O gênero é obrigatório")
+    private String genero;
+
+    @Column(nullable = false)
     @NotBlank(message = "O nome é obrigatório")
     @Size(max = 100, message = "O nome deve ter no máximo 100 caracteres")
     private String nome;

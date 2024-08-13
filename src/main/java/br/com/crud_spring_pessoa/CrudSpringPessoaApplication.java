@@ -23,7 +23,8 @@ public class CrudSpringPessoaApplication {
 			pessoaRepository.deleteAll();
 
 			Pessoa c = new Pessoa();
-			c.setNome("othon");;
+			c.setGenero("M");
+			c.setNome("othon");
 			c.setEmail("othon@gmail.com");
 			c.setNascimento(LocalDate.of(1995, 9, 5));
 			c.setCpf("1234567890");
@@ -31,7 +32,8 @@ public class CrudSpringPessoaApplication {
 			pessoaRepository.save(c);
 
 			Pessoa c1 = new Pessoa();
-			c1.setNome("maria");;
+			c1.setGenero("F");
+			c1.setNome("maria");
 			c1.setEmail("maria@gmail.com");
 			c1.setNascimento(LocalDate.of(1984, 5, 7));
 			c1.setCpf("1234567899");
@@ -39,7 +41,8 @@ public class CrudSpringPessoaApplication {
 			pessoaRepository.save(c1);
 
 			Pessoa c2 = new Pessoa();
-			c2.setNome("jack");;
+			c2.setGenero("M");
+			c2.setNome("jack");
 			c2.setEmail("jack@hotmail.com");
 			c2.setNascimento(LocalDate.of(2020, 7, 7));
 			c2.setCpf("1234567898");
