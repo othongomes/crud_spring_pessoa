@@ -20,7 +20,6 @@ public class CrudSpringPessoaApplication {
 	@Bean //Spring gerencia o ciclo de vida
 	CommandLineRunner initDatabase(PessoaRepository pessoaRepository) {
 		return args -> {
-			pessoaRepository.deleteAll();
 
 			Pessoa c = new Pessoa();
 			c.setGenero("M");
