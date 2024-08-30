@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import br.com.crud_spring_pessoa.Model.Pessoa;
+import br.com.crud_spring_pessoa.enums.Category;
 import br.com.crud_spring_pessoa.repository.PessoaRepository;
 
 @SpringBootApplication
@@ -22,7 +23,7 @@ public class CrudSpringPessoaApplication {
 		return args -> {
 
 			Pessoa c = new Pessoa();
-			c.setGenero("M");
+			c.setGenero(Category.M);
 			c.setNome("othon");
 			c.setEmail("othon@gmail.com");
 			c.setNascimento(LocalDate.of(1995, 9, 5));
@@ -31,7 +32,7 @@ public class CrudSpringPessoaApplication {
 			pessoaRepository.save(c);
 
 			Pessoa c1 = new Pessoa();
-			c1.setGenero("F");
+			c1.setGenero(Category.F);
 			c1.setNome("maria");
 			c1.setEmail("maria@gmail.com");
 			c1.setNascimento(LocalDate.of(1984, 5, 7));
@@ -40,7 +41,7 @@ public class CrudSpringPessoaApplication {
 			pessoaRepository.save(c1);
 
 			Pessoa c2 = new Pessoa();
-			c2.setGenero("M");
+			c2.setGenero(Category.M);
 			c2.setNome("jack");
 			c2.setEmail("jack@hotmail.com");
 			c2.setNascimento(LocalDate.of(2020, 7, 7));

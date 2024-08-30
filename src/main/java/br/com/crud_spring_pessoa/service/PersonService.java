@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import br.com.crud_spring_pessoa.dto.PessoaDTO;
 import br.com.crud_spring_pessoa.dto.mapper.PessoaMapper;
+import br.com.crud_spring_pessoa.enums.Category;
 import br.com.crud_spring_pessoa.exception.RecordNotFoundException;
 import br.com.crud_spring_pessoa.repository.PessoaRepository;
 import jakarta.validation.Valid;
@@ -51,7 +52,7 @@ public class PersonService {
         return pessoaRepository.findById(id)
                 .map(pessoa -> {
                     pessoa.setNome(pessoaDetails.nome());
-                    pessoa.setGenero(pessoaDetails.genero());
+                    pessoa.setGenero(Category.F);
                     pessoa.setNascimento(pessoaDetails.nascimento());
                     pessoa.setEmail(pessoaDetails.email());
                     pessoa.setCpf(pessoaDetails.cpf());
