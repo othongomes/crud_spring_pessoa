@@ -6,11 +6,9 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import br.com.crud_spring_pessoa.dto.PessoaDTO;
 import br.com.crud_spring_pessoa.dto.mapper.PessoaMapper;
-import br.com.crud_spring_pessoa.enums.Category;
 import br.com.crud_spring_pessoa.exception.RecordNotFoundException;
 import br.com.crud_spring_pessoa.repository.PessoaRepository;
 import jakarta.validation.Valid;
@@ -38,7 +36,7 @@ public class PersonService {
         .collect(Collectors.toList());
     }
 
-    public PessoaDTO getPessoaById(@PathVariable @NotNull @Positive Long id) {
+    public PessoaDTO getPessoaById(@NotNull @Positive Long id) {
         return pessoaRepository.findById(id).map(pessoaMapper::toDTO)
         .orElseThrow(() -> new RecordNotFoundException(id));
     }
@@ -52,7 +50,7 @@ public class PersonService {
         return pessoaRepository.findById(id)
                 .map(pessoa -> {
                     pessoa.setNome(pessoaDetails.nome());
-                    pessoa.setGenero(Category.F);
+                    pessoa.setGenero(pessoaMapper.convertCategotyValue(pessoaDetails.genero()));
                     pessoa.setNascimento(pessoaDetails.nascimento());
                     pessoa.setEmail(pessoaDetails.email());
                     pessoa.setCpf(pessoaDetails.cpf());
@@ -63,7 +61,7 @@ public class PersonService {
                 .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public void deletePessoa(@PathVariable @NotNull @Positive Long id) {
+    public void deletePessoa(@NotNull @Positive Long id) {
         pessoaRepository.delete(pessoaRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id)));
     }
 

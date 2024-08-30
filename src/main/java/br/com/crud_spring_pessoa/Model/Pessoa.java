@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import br.com.crud_spring_pessoa.enums.Category;
 import br.com.crud_spring_pessoa.enums.Status;
 import br.com.crud_spring_pessoa.enums.converters.CategoryConverter;
+import br.com.crud_spring_pessoa.enums.converters.StatusConverter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -75,6 +76,7 @@ public class Pessoa {
     @NotBlank(message = "O CPF é obrigatório")
     private String cpf;
 
+    //@Convert(converter = StatusConverter.class)
     @NotNull
     @Column(length = 10,nullable = false)
     //@Pattern(regexp = "Ativo|Inativo")

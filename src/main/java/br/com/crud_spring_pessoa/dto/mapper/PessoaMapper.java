@@ -15,7 +15,7 @@ public class PessoaMapper {
             return null;
         }
         
-        return new PessoaDTO(pessoa.getId(), "M", pessoa.getNome(), pessoa.getNascimento(), pessoa.getEmail(), pessoa.getCpf());
+        return new PessoaDTO(pessoa.getId(), pessoa.getGenero().getValue(), pessoa.getNome(), pessoa.getNascimento(), pessoa.getEmail(), pessoa.getCpf());
     }
 
     public Pessoa toEntity(PessoaDTO pessoaDTO) {
@@ -28,12 +28,24 @@ public class PessoaMapper {
         if (pessoaDTO.id() != null) {
             pessoa.setId(pessoaDTO.id());
         }
-        pessoa.setGenero(Category.F);
+        pessoa.setGenero(convertCategotyValue(pessoaDTO.genero()));
         pessoa.setNome(pessoaDTO.nome());
         pessoa.setNascimento(pessoaDTO.nascimento());
         pessoa.setEmail(pessoaDTO.email());
         pessoa.setCpf(pessoaDTO.cpf());
         return pessoa;
+    }
+
+    public Category convertCategotyValue(String value) {
+
+        if (value == null) {
+            return null;
+        }
+        return switch (value) {
+            case "Masculino" -> Category.M;
+            case "Feminino" -> Category.F;
+            default -> throw new IllegalArgumentException("Invalid value");
+        };
     }
     
 }
