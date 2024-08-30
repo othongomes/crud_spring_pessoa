@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.crud_spring_pessoa.Model.Pessoa;
-import br.com.crud_spring_pessoa.repository.PessoaRepository;
 import br.com.crud_spring_pessoa.service.PersonService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -42,33 +41,25 @@ public class PessoaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pessoa> getPessoaById(@PathVariable @NotNull @Positive Long id) {
-        return personService.getPessoaById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Pessoa getPessoaById(@PathVariable @NotNull @Positive Long id) {
+        return personService.getPessoaById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Pessoa createPessoa(@Valid @RequestBody Pessoa pessoa) {
         return personService.createPessoa(pessoa);
-        // return ResponseEntity.status(HttpStatus.CREATED)
-        // .body(pessoaRepository.save(pessoa));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Pessoa> updatePessoa(@Valid @PathVariable @NotNull @Positive Long id,
+    public Pessoa updatePessoa(@Valid @PathVariable @NotNull @Positive Long id,
             @RequestBody Pessoa pessoaDetails) {
-        return personService.updatePessoa(id, pessoaDetails)
-                .map(pessoa -> ResponseEntity.ok(pessoa))
-                .orElse(ResponseEntity.notFound().build());
+        return personService.updatePessoa(id, pessoaDetails);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deletePessoa(@PathVariable @NotNull @Positive Long id) {
-        if (personService.deletePessoa(id)) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deletePessoa(@PathVariable @NotNull @Positive Long id) {
+        personService.deletePessoa(id);
     }
 }
