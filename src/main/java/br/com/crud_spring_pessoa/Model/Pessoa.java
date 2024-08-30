@@ -50,7 +50,6 @@ public class Pessoa {
     @Length(min = 3, max = 100)
     private String nome;
 
-    @NotNull
     @Column(nullable = false)
     @NotNull(message = "A idade é obrigatória")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
