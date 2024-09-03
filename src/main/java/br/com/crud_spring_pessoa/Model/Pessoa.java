@@ -1,6 +1,8 @@
 package br.com.crud_spring_pessoa.Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -13,6 +15,7 @@ import br.com.crud_spring_pessoa.enums.Category;
 import br.com.crud_spring_pessoa.enums.Status;
 import br.com.crud_spring_pessoa.enums.converters.CategoryConverter;
 import br.com.crud_spring_pessoa.enums.converters.StatusConverter;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
@@ -21,6 +24,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -81,6 +86,10 @@ public class Pessoa {
     @Column(length = 10,nullable = false)
     //@Pattern(regexp = "Ativo|Inativo")
     private Status status = Status.ATIVO;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pessoa")
+    //@JoinColumn(name = "pessoa_id")
+    private List<Phone> phones = new ArrayList<>();
     
     
 }
