@@ -1,12 +1,14 @@
 package br.com.crud_spring_pessoa.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import br.com.crud_spring_pessoa.Model.Phone;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -41,7 +43,9 @@ public record PessoaDTO(
 
     @NotNull
     //@CPF(message = "CPF inválido")
-    String cpf
+    String cpf,
+
+    List<Phone> phones
 ) {
     
 }

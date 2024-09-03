@@ -15,7 +15,7 @@ public class PessoaMapper {
             return null;
         }
         
-        return new PessoaDTO(pessoa.getId(), pessoa.getGenero().getValue(), pessoa.getNome(), pessoa.getNascimento(), pessoa.getEmail(), pessoa.getCpf());
+        return new PessoaDTO(pessoa.getId(), pessoa.getGenero().getValue(), pessoa.getNome(), pessoa.getNascimento(), pessoa.getEmail(), pessoa.getCpf(), pessoa.getPhones());
     }
 
     public Pessoa toEntity(PessoaDTO pessoaDTO) {
